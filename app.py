@@ -1,25 +1,21 @@
 import streamlit as st
 import pandas as pd
-pip install nltk
 import nltk
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet')
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from sklearn.model_selection import train_test_split
-from sklearn.feature_extraction.text import CountVectorizer
 from gensim.models import Word2Vec
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import accuracy_score, classification_report, precision_recall_fscore_support
 import matplotlib.pyplot as plt
 from sklearn.metrics import precision_recall_curve
+import numpy as np
 
-# Download NLTK resources
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet')
+# Download NLTK resources if not already done (place in nltk_setup.py)
+# nltk.download('punkt')
+# nltk.download('stopwords')
+# nltk.download('wordnet')
 
 # Function to load dataset
 @st.cache
@@ -52,10 +48,23 @@ def perform_sentiment_analysis(data):
     X_train, X_test, y_train, y_test = train_test_split(data['preprocessed_feedback'], data['sentiment'], test_size=0.2, random_state=42)
 
     # Feature extraction using Word2Vec
-    tokenized_text = X_train.apply(lambda x: x.split())
-    w2v_model = Word2Vec(tokenized_text, size=100, window=5, min_count=1, workers=4)
-    X_train_vectorized = w2v_model.wv[X_train.tolist()]
-    X_test_vectorized = w2v_model.wv[X_test.tolist()]
+    tokenized_text_train = X_train.apply(lambda x: x.split())
+    tokenized_text_test = X_test.apply(lambda x: x.split())
+    w2v_model = Word2Vec(tokenized_text_train, vector_size=100, window=5, min_count=1, workers=4)
+
+    def vectorize_text(text, model):
+        vector = np.zeros(model.vector_size)
+        count = 0
+        for word in text:
+            if word in model.wv:
+                vector += model.wv[word]
+                count += 1
+        if count > 0:
+            vector /= count
+        return vector
+
+    X_train_vectorized = np.array([vectorize_text(text, w2v_model) for text in tokenized_text_train])
+    X_test_vectorized = np.array([vectorize_text(text, w2v_model) for text in tokenized_text_test])
 
     # Initialize and train the Naive Bayes classifier
     naive_bayes = MultinomialNB()
@@ -79,11 +88,12 @@ def perform_sentiment_analysis(data):
     # Plot precision-recall curve
     probs = naive_bayes.predict_proba(X_test_vectorized)
     precision, recall, _ = precision_recall_curve(y_test, probs[:, 1])
-    plt.plot(recall, precision, marker='.')
-    plt.xlabel('Recall')
-    plt.ylabel('Precision')
-    plt.title('Precision-Recall Curve')
-    st.pyplot(plt)
+    fig, ax = plt.subplots()
+    ax.plot(recall, precision, marker='.')
+    ax.set_xlabel('Recall')
+    ax.set_ylabel('Precision')
+    ax.set_title('Precision-Recall Curve')
+    st.pyplot(fig)
 
 # Main function
 def main():
