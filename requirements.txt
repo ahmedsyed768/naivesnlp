@@ -4,4 +4,4 @@ nltk
 scikit-learn
 gensim
 matplotlib
-scipy>=1.7.3
+scipy==1.9.0
