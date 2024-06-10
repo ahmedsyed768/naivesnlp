@@ -138,7 +138,8 @@ if uploaded_file:
         # Train Naive Bayes classifier
         st.subheader("Naive Bayes Classifier")
         #reviews = df.columns.values.flatten().tolist()
-        reviews = df.columns[0]].dropna().astype(str).tolist()
+        #reviews = df.columns[0]].dropna().astype(str).tolist()
+        reviews = df['teaching'].dropna().astype(str).tolist()
         #labels = [1 if sentiment['compound'] >= 0.65 else 0 for column in df.columns for sentiment in sentiments[column]]
         #labels = [1 if sentiment >= 0.65 else 0 for df.column in sentiments for sentiment in sentiments[column]]
         labels = [1 if sentiment['compound'] >= 0.65 else 0 for column in sentiments for sentiment in sentiments[column]]
