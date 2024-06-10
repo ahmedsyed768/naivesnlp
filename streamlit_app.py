@@ -167,7 +167,7 @@ if uploaded_file:
             st.error(f"An error occurred during prediction: {e}")
         else:
             st.write("Classifier trained successfully.")
-        pipeline = analyzer.train_classifier(reviews, labels)
+            pipeline = analyzer.train_classifier(reviews, labels)
         #reviews = df.columns.values.flatten().tolist()
         #reviews = df.columns[0]].dropna().astype(str).tolist()
         #reviews = df.columns[1::2].dropna().astype(str).tolist()
