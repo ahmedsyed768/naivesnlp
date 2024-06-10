@@ -87,19 +87,27 @@ if uploaded_file:
     df = pd.read_csv(io.BytesIO(uploaded_file.read()), encoding='utf-8')
     st.write(df.head())  # Debug statement to check the loaded data
     analyzer = SentimentAnalyzer()
-    if 'teaching' in df.columns and 'coursecontent' in df.columns and 'examination' in df.columns and 'labwork' in df.columns and 'library_facilities' in df.columns and 'extracurricular' in df.columns:
-        review_columns = df.columns[1::2]
-        reviews = df[review_columns].values.flatten().tolist()
+    # Check if 'teaching' column exists
+    if 'teaching' not in df.columns:
+        st.error("The column 'teaching' does not exist in the uploaded file.")
+    else:
+        # Analyze sentiments for the 'teaching' column
+        teaching_reviews = df['teaching'].dropna().astype(str).tolist()
+        teaching_sentiments = [analyzer.analyze_sentiment(review) for review in teaching_reviews]
+        
+    #if 'teaching' in df.columns and 'coursecontent' in df.columns and 'examination' in df.columns and 'labwork' in df.columns and 'library_facilities' in df.columns and 'extracurricular' in df.columns:
+        #review_columns = df.columns[1::2]
+        #reviews = df[review_columns].values.flatten().tolist()
 
-        review_period = st.selectbox("Review Period:", [1, 4])
+        #review_period = st.selectbox("Review Period:", [1, 4])
 
-        sentiments = []
-        if review_period == 1:
-            for review in reviews:
-                sentiments.extend(analyzer.analyze_sentiment([review]))
-        else:
-            for i in range(0, len(reviews), review_period):
-                sentiments.extend(analyzer.analyze_sentiment(reviews[i:i + review_period]))
+        #sentiments = []
+        #if review_period == 1:
+            #for review in reviews:
+                #sentiments.extend(analyzer.analyze_sentiment([review]))
+        #else:
+            #for i in range(0, len(reviews), review_period):
+                #sentiments.extend(analyzer.analyze_sentiment(reviews[i:i + review_period]))
 
         overall_sentiment = analyzer.calculate_overall_sentiment(reviews)
         st.subheader(f"Overall Sentiment: {overall_sentiment:.2f}")
@@ -137,10 +145,15 @@ if uploaded_file:
 
         # Train Naive Bayes classifier
         st.subheader("Naive Bayes Classifier")
+        reviews = df['teaching'].dropna().astype(str).tolist()
+        labels = [1 if sentiment >= 0.65 else 0 for sentiment in teaching_sentiments]
+        pipeline = analyzer.train_classifier(teaching_reviews, labels)
+        st.write("Classifier trained successfully.")
+        #st.subheader("Naive Bayes Classifier")
         #reviews = df.columns.values.flatten().tolist()
         #reviews = df.columns[0]].dropna().astype(str).tolist()
-        reviews = df.columns[1::2].dropna().astype(str).tolist()
-        #reviews = df['teaching'].dropna().astype(str).tolist()
+        #reviews = df.columns[1::2].dropna().astype(str).tolist()
+        
         #labels = [1 if sentiment['compound'] >= 0.65 else 0 for column in df.columns for sentiment in sentiments[column]]
         #labels = [1 if sentiment >= 0.65 else 0 for df.column in sentiments for sentiment in sentiments[column]]
         labels = [1 if sentiment >= 0.65 else 0 for sentiment in teaching_sentiments]
