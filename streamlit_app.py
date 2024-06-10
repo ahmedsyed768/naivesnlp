@@ -28,6 +28,8 @@ class SentimentAnalyzer:
         X = vectorizer.fit_transform(reviews)
 
         if X.shape[0] != len(labels):
+            print(f"Number of samples in features: {X.shape[0]}")
+            print(f"Number of labels: {len(labels)}")
             raise ValueError("Number of samples in features and labels must be the same.")
 
         self.clf = MultinomialNB()
@@ -156,13 +158,23 @@ if uploaded_file:
         #reviews = [review for column in feedback_columns if column in df.columns for review in df[column].dropna().astype(str).tolist()]
         reviews = [review for column in df.columns if column in df.columns for review in df[column].dropna().astype(str).tolist()]
         labels = [1 if sentiment >= 0.65 else 0 for column in df.columns if column in sentiments for sentiment in sentiments[column]]
+         print(f"Number of reviews: {len(reviews)}")
+    print(f"Number of labels: {len(labels)}")
+    
+    if len(reviews) != len(labels):
+        st.write(f"Number of reviews: {len(reviews)}")
+        st.write(f"Number of labels: {len(labels)}")
+        st.write("Mismatch between number of reviews and labels. Please check the input data.")
+    else:
+        pipeline = analyzer.train_classifier(reviews, labels)
+        st.write("Classifier trained successfully.")
         #labels = [1 if sentiment['compound'] >= 0.65 else 0 for column in df.columns for sentiment in sentiments[column]]
         #labels = [1 if sentiment >= 0.65 else 0 for df.column in sentiments for sentiment in sentiments[column]]
         #labels = [1 if sentiment >= 0.65 else 0 for sentiment in teaching_sentiments]
         #for column in df.columns:
             #print(f"Column: {column}, Sentiments: {sentiments[column]}")
-        pipeline = analyzer.train_classifier(reviews, labels)
-        st.write("Classifier trained successfully.")
+        #pipeline = analyzer.train_classifier(reviews, labels)
+        #st.write("Classifier trained successfully.")
 
         # Prediction on new data
         test_reviews = st.text_area("Enter reviews for prediction (separate each review with a new line):")
