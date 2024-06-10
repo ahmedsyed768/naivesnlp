@@ -184,4 +184,4 @@ if uploaded_file:
             st.write("Predictions:")
             st.write(predictions)
     else:
-        #st.write("Columns mismatch. Please ensure the CSV file contains the required columns.")
+        st.write("Columns mismatch. Please ensure the CSV file contains the required columns.")
