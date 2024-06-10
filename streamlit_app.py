@@ -154,6 +154,7 @@ if uploaded_file:
         st.subheader("Naive Bayes Classifier")
 
                 # Prediction on new data
+        pipeline = analyzer.train_classifier(reviews, labels)
         test_reviews = st.text_area("Enter reviews for prediction (separate each review with a new line):")
         if test_reviews:
              test_reviews_list = test_reviews.split('\n')
