@@ -152,12 +152,12 @@ if uploaded_file:
         #pipeline = analyzer.train_classifier(teaching_reviews, labels)
         #st.write("Classifier trained successfully.")
         st.subheader("Naive Bayes Classifier")
-        pipeline = analyzer.train_classifier(reviews, labels)
         reviews = [review for column in df.columns if column in df.columns for review in df[column].dropna().astype(str).tolist()]
         labels = [1 if sentiment >= 0.65 else 0 for column in df.columns if column in sentiments for sentiment in sentiments[column]]
-                # Prediction on new data
-    
+        
+        # Prediction on new data
         test_reviews = st.text_area("Enter reviews for prediction (separate each review with a new line):")
+        pipeline = analyzer.train_classifier(reviews, labels)
         if test_reviews:
              test_reviews_list = test_reviews.split('\n')
         try:
