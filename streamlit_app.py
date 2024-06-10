@@ -177,10 +177,10 @@ if uploaded_file:
         #st.write("Classifier trained successfully.")
 
         # Prediction on new data
-        test_reviews = st.text_area("Enter reviews for prediction (separate each review with a new line):")
-        if test_reviews:
-            test_reviews_list = test_reviews.split('\n')
-            predictions = pipeline.predict(test_reviews_list)
+        self_reviews = st.text_area("Enter reviews for prediction (separate each review with a new line):")
+        if self_reviews:
+            self_reviews_list = self_reviews.split('\n')
+            predictions = pipeline.predict(self_reviews_list)
             st.write("Predictions:")
             st.write(predictions)
         else:
