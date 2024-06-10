@@ -140,7 +140,7 @@ if uploaded_file:
         reviews = df.columns.values.flatten().tolist()
         labels = [1 if sentiment['compound'] >= 0.65 else 0 for column in df.columns for sentiment in sentiments[column]]
         for column in df.columns:
-    print(f"Column: {column}, Sentiments: {sentiments[column]}")
+            print(f"Column: {column}, Sentiments: {sentiments[column]}")
         pipeline = analyzer.train_classifier(reviews, labels)
         st.write("Classifier trained successfully.")
 
