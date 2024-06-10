@@ -152,7 +152,8 @@ if uploaded_file:
         #pipeline = analyzer.train_classifier(teaching_reviews, labels)
         #st.write("Classifier trained successfully.")
         st.subheader("Naive Bayes Classifier")
-
+        reviews = [review for column in df.columns if column in df.columns for review in df[column].dropna().astype(str).tolist()]
+        labels = [1 if sentiment >= 0.65 else 0 for column in df.columns if column in sentiments for sentiment in sentiments[column]]
                 # Prediction on new data
         pipeline = analyzer.train_classifier(reviews, labels)
         test_reviews = st.text_area("Enter reviews for prediction (separate each review with a new line):")
@@ -168,10 +169,9 @@ if uploaded_file:
         #reviews = df.columns[0]].dropna().astype(str).tolist()
         #reviews = df.columns[1::2].dropna().astype(str).tolist()
         #reviews = [review for column in feedback_columns if column in df.columns for review in df[column].dropna().astype(str).tolist()]
-        reviews = [review for column in df.columns if column in df.columns for review in df[column].dropna().astype(str).tolist()]
-        labels = [1 if sentiment >= 0.65 else 0 for column in df.columns if column in sentiments for sentiment in sentiments[column]]
-        print(f"Number of reviews: {len(reviews)}")
-        print(f"Number of labels: {len(labels)}")
+       
+       # print(f"Number of reviews: {len(reviews)}")
+      #  print(f"Number of labels: {len(labels)}")
     
     #if len(reviews) != len(labels):
        # st.write(f"Number of reviews: {len(reviews)}")
