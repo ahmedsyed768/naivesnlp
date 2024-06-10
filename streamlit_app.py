@@ -165,9 +165,9 @@ if uploaded_file:
             st.write(predictions)
         except Exception as e:
             st.error(f"An error occurred during prediction: {e}")
-         else:
-             pipeline = analyzer.train_classifier(reviews, labels)
-             st.write("Classifier trained successfully.")
+    else:
+        pipeline = analyzer.train_classifier(reviews, labels)
+        st.write("Classifier trained successfully.")
         #reviews = df.columns.values.flatten().tolist()
         #reviews = df.columns[0]].dropna().astype(str).tolist()
         #reviews = df.columns[1::2].dropna().astype(str).tolist()
@@ -180,9 +180,9 @@ if uploaded_file:
        # st.write(f"Number of reviews: {len(reviews)}")
         #st.write(f"Number of labels: {len(labels)}")
        # st.write("Mismatch between number of reviews and labels. Please check the input data.")
-   # else:
-    #    pipeline = analyzer.train_classifier(reviews, labels)
-     #   st.write("Classifier trained successfully.")
+    #else:
+        #pipeline = analyzer.train_classifier(reviews, labels)
+        #st.write("Classifier trained successfully.")
         #labels = [1 if sentiment['compound'] >= 0.65 else 0 for column in df.columns for sentiment in sentiments[column]]
         #labels = [1 if sentiment >= 0.65 else 0 for df.column in sentiments for sentiment in sentiments[column]]
         #labels = [1 if sentiment >= 0.65 else 0 for sentiment in teaching_sentiments]
