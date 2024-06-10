@@ -86,10 +86,9 @@ if uploaded_file:
     df = pd.read_csv(io.BytesIO(uploaded_file.read()), encoding='utf-8')
     st.write(df.head())  # Debug statement to check the loaded data
     analyzer = SentimentAnalyzer()
-    if 'teaching' in df.columns and 'coursecontent' in df.columns and 'examination' in df.columns and 'labwork' in df.columns and 'library_facilities' in df.columns and 'extracurricular' in df.columns:
+    feedback_columns = ['teaching', 'library_facilities', 'examination', 'labwork', 'extracurricular', 'coursecontent']
         review_columns = df.columns[1::2]
         reviews = df[review_columns].values.flatten().tolist()
-
         review_period = st.selectbox("Review Period:", [1, 4])
 
         sentiments = []
