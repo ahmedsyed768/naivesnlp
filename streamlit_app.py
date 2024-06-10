@@ -163,9 +163,9 @@ if uploaded_file:
 
         # Prediction code
         if pipeline is not None:  # Check if pipeline is defined
-        predictions = pipeline.predict(test_reviews)  # Use pipeline for prediction
-        st.write("Predictions:")
-        st.write(predictions)
+            predictions = pipeline.predict(test_reviews)  # Use pipeline for prediction
+            st.write("Predictions:")
+            st.write(predictions)
         else:
         st.error("Classifier has not been trained yet.")  # Display error message if pipeline is not defined
         
