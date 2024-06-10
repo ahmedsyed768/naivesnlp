@@ -144,12 +144,12 @@ if uploaded_file:
         st.write(breakdown_df)
 
         # Train Naive Bayes classifier
-        st.subheader("Naive Bayes Classifier")
-        reviews = df['teaching'].dropna().astype(str).tolist()
-        labels = [1 if sentiment >= 0.65 else 0 for sentiment in teaching_sentiments]
-        pipeline = analyzer.train_classifier(teaching_reviews, labels)
-        st.write("Classifier trained successfully.")
         #st.subheader("Naive Bayes Classifier")
+        #reviews = df['teaching'].dropna().astype(str).tolist()
+        #labels = [1 if sentiment >= 0.65 else 0 for sentiment in teaching_sentiments]
+        #pipeline = analyzer.train_classifier(teaching_reviews, labels)
+        #st.write("Classifier trained successfully.")
+        st.subheader("Naive Bayes Classifier")
         #reviews = df.columns.values.flatten().tolist()
         #reviews = df.columns[0]].dropna().astype(str).tolist()
         #reviews = df.columns[1::2].dropna().astype(str).tolist()
