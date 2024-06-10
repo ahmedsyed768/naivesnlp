@@ -159,7 +159,7 @@ if uploaded_file:
 
         # Condition to train classifier
         if condition_to_train_classifier:
-        pipeline = train_classifier(features, labels)  # Train classifier and assign to pipeline
+            pipeline = train_classifier(features, labels)  # Train classifier and assign to pipeline
 
         # Prediction code
         if pipeline is not None:  # Check if pipeline is defined
