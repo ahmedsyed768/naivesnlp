@@ -143,7 +143,7 @@ if uploaded_file:
         #reviews = df['teaching'].dropna().astype(str).tolist()
         #labels = [1 if sentiment['compound'] >= 0.65 else 0 for column in df.columns for sentiment in sentiments[column]]
         #labels = [1 if sentiment >= 0.65 else 0 for df.column in sentiments for sentiment in sentiments[column]]
-        labels = [1 if sentiment['compound'] >= 0.65 else 0 for df.column in sentiments for sentiment in sentiments[df.column]]
+        labels = [1 if sentiment >= 0.65 else 0 for sentiment in teaching_sentiments]
         for column in df.columns:
             print(f"Column: {column}, Sentiments: {sentiments[column]}")
         pipeline = analyzer.train_classifier(reviews, labels)
