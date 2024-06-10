@@ -161,10 +161,10 @@ if uploaded_file:
         print(f"Number of reviews: {len(reviews)}")
         print(f"Number of labels: {len(labels)}")
     
-    if len(reviews) != len(labels):
-        st.write(f"Number of reviews: {len(reviews)}")
-        st.write(f"Number of labels: {len(labels)}")
-        st.write("Mismatch between number of reviews and labels. Please check the input data.")
+    #if len(reviews) != len(labels):
+       # st.write(f"Number of reviews: {len(reviews)}")
+        #st.write(f"Number of labels: {len(labels)}")
+       # st.write("Mismatch between number of reviews and labels. Please check the input data.")
     else:
         pipeline = analyzer.train_classifier(reviews, labels)
         st.write("Classifier trained successfully.")
