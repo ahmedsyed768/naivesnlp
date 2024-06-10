@@ -109,9 +109,9 @@ if uploaded_file:
             #for i in range(0, len(reviews), review_period):
                 #sentiments.extend(analyzer.analyze_sentiment(reviews[i:i + review_period]))
 
-        overall_sentiment = analyzer.calculate_overall_sentiment(reviews)
-        st.subheader(f"Overall Sentiment: {overall_sentiment:.2f}")
-        st.subheader("Sentiment Analysis")
+        #overall_sentiment = analyzer.calculate_overall_sentiment(reviews)
+        #st.subheader(f"Overall Sentiment: {overall_sentiment:.2f}")
+        #st.subheader("Sentiment Analysis")
 
         # Plotting sentiment
         weeks = list(range(1, len(sentiments) + 1))
