@@ -86,26 +86,13 @@ if uploaded_file:
     df = pd.read_csv(io.BytesIO(uploaded_file.read()), encoding='utf-8')
     st.write(df.head())  # Debug statement to check the loaded data
     analyzer = SentimentAnalyzer()
-    feedback_columns = ['teaching', 'library_facilities', 'examination', 'labwork', 'extracurricular', 'coursecontent']
-    sentiments = {column: [] for column in feedback_columns}
+    if 'teaching' in df.columns:
+        teaching_reviews = df['teaching'].dropna().astype(str).tolist()
+        teaching_sentiments = [analyzer.analyze_sentiment(review) for review in teaching_reviews]
 
-    for column in feedback_columns:
-        if column in df.columns:
-            for review in df[column]:
-                sentiment = analyzer.analyze_sentiment(review)
-                sentiments[column].append(sentiment)
+        # Calculate overall sentiment score
+        overall_teaching_sentiment = sum(teaching_sentiments) / len(teaching_sentiments)
 
-        sentiments = []
-        if review_period == 1:
-            for review in reviews:
-                sentiments.extend(analyzer.analyze_sentiment([review]))
-        else:
-            for i in range(0, len(reviews), review_period):
-                sentiments.extend(analyzer.analyze_sentiment(reviews[i:i + review_period]))
-
-        overall_sentiment = analyzer.calculate_overall_sentiment(reviews)
-        st.subheader(f"Overall Sentiment: {overall_sentiment:.2f}")
-        st.subheader("Sentiment Analysis")
 
         # Plotting sentiment
         weeks = list(range(1, len(sentiments) + 1))
