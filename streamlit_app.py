@@ -158,8 +158,8 @@ if uploaded_file:
         #reviews = [review for column in feedback_columns if column in df.columns for review in df[column].dropna().astype(str).tolist()]
         reviews = [review for column in df.columns if column in df.columns for review in df[column].dropna().astype(str).tolist()]
         labels = [1 if sentiment >= 0.65 else 0 for column in df.columns if column in sentiments for sentiment in sentiments[column]]
-         print(f"Number of reviews: {len(reviews)}")
-    print(f"Number of labels: {len(labels)}")
+        print(f"Number of reviews: {len(reviews)}")
+        print(f"Number of labels: {len(labels)}")
     
     if len(reviews) != len(labels):
         st.write(f"Number of reviews: {len(reviews)}")
