@@ -166,8 +166,7 @@ if uploaded_file:
         except Exception as e:
             st.error(f"An error occurred during prediction: {e}")
         else:
-        
-        st.write("Classifier trained successfully.")
+            st.write("Classifier trained successfully.")
         pipeline = analyzer.train_classifier(reviews, labels)
         #reviews = df.columns.values.flatten().tolist()
         #reviews = df.columns[0]].dropna().astype(str).tolist()
