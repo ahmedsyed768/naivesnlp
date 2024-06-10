@@ -152,6 +152,17 @@ if uploaded_file:
         #pipeline = analyzer.train_classifier(teaching_reviews, labels)
         #st.write("Classifier trained successfully.")
         st.subheader("Naive Bayes Classifier")
+
+                # Prediction on new data
+        test_reviews = st.text_area("Enter reviews for prediction (separate each review with a new line):")
+        if test_reviews:
+             test_reviews_list = test_reviews.split('\n')
+        try:
+            predictions = pipeline.predict(test_reviews_list)
+            st.write("Predictions:")
+            st.write(predictions)
+        except Exception as e:
+            st.error(f"An error occurred during prediction: {e}")
         #reviews = df.columns.values.flatten().tolist()
         #reviews = df.columns[0]].dropna().astype(str).tolist()
         #reviews = df.columns[1::2].dropna().astype(str).tolist()
@@ -176,16 +187,7 @@ if uploaded_file:
         #pipeline = analyzer.train_classifier(reviews, labels)
         #st.write("Classifier trained successfully.")
 
-        # Prediction on new data
-        test_reviews = st.text_area("Enter reviews for prediction (separate each review with a new line):")
-        if test_reviews:
-             test_reviews_list = test_reviews.split('\n')
-        try:
-            predictions = pipeline.predict(test_reviews_list)
-            st.write("Predictions:")
-            st.write(predictions)
-        except Exception as e:
-            st.error(f"An error occurred during prediction: {e}")
+
         
         # Prediction on new data
         #test_reviews = st.text_area("Enter reviews for prediction (separate each review with a new line):")
