@@ -138,7 +138,7 @@ if uploaded_file:
         # Train Naive Bayes classifier
         st.subheader("Naive Bayes Classifier")
         reviews = df.columns.values.flatten().tolist()
-        labels = [1 if s['compound'] >= 0.65 else 0 for column in feedback_columns for s in sentiments[column]]
+        labels = [1 if s['compound'] >= 0.65 else 0 for column in df.columns for s in sentiments[column]]
         pipeline = analyzer.train_classifier(reviews, labels)
         st.write("Classifier trained successfully.")
 
