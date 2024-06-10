@@ -161,14 +161,13 @@ if uploaded_file:
              test_reviews_list = test_reviews.split('\n')
         try:
             predictions = pipeline.predict(test_reviews_list)
-            pipeline = analyzer.train_classifier(reviews, labels)
             st.write("Predictions:")
             st.write(predictions)
         except Exception as e:
             st.error(f"An error occurred during prediction: {e}")
-    else:
-        pipeline = analyzer.train_classifier(reviews, labels)
-        st.write("Classifier trained successfully.")
+        else:
+            pipeline = analyzer.train_classifier(reviews, labels)
+            st.write("Classifier trained successfully.")
         #reviews = df.columns.values.flatten().tolist()
         #reviews = df.columns[0]].dropna().astype(str).tolist()
         #reviews = df.columns[1::2].dropna().astype(str).tolist()
