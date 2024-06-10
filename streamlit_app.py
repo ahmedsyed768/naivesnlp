@@ -136,18 +136,18 @@ if uploaded_file:
         st.write(breakdown_df)
 
         # Train Naive Bayes classifier
-    st.subheader("Naive Bayes Classifier")
-    reviews = df[feedback_columns].values.flatten().tolist()
-    labels = [1 if s['compound'] >= 0.65 else 0 for column in feedback_columns for s in sentiments[column]]
-    pipeline = analyzer.train_classifier(reviews, labels)
-    st.write("Classifier trained successfully.")
+        st.subheader("Naive Bayes Classifier")
+        reviews = df[feedback_columns].values.flatten().tolist()
+        labels = [1 if s['compound'] >= 0.65 else 0 for column in feedback_columns for s in sentiments[column]]
+        pipeline = analyzer.train_classifier(reviews, labels)
+        st.write("Classifier trained successfully.")
 
-    # Prediction on new data
-    test_reviews = st.text_area("Enter reviews for prediction (separate each review with a new line):")
-    if test_reviews:
-        test_reviews_list = test_reviews.split('\n')
-        predictions = pipeline.predict(test_reviews_list)
-        st.write("Predictions:")
-        st.write(predictions)
-else:
-    st.write("Columns mismatch. Please ensure the CSV file contains the required columns.")
+        # Prediction on new data
+        test_reviews = st.text_area("Enter reviews for prediction (separate each review with a new line):")
+        if test_reviews:
+            test_reviews_list = test_reviews.split('\n')
+            predictions = pipeline.predict(test_reviews_list)
+            st.write("Predictions:")
+            st.write(predictions)
+    else:
+        st.write("Columns mismatch. Please ensure the CSV file contains the required columns.")
