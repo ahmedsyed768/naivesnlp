@@ -87,9 +87,13 @@ if uploaded_file:
     st.write(df.head())  # Debug statement to check the loaded data
     analyzer = SentimentAnalyzer()
     feedback_columns = ['teaching', 'library_facilities', 'examination', 'labwork', 'extracurricular', 'coursecontent']
-        review_columns = feedback_columns[1::2]
-        reviews = df[review_columns].values.flatten().tolist()
-        review_period = st.selectbox("Review Period:", [1, 4])
+    sentiments = {column: [] for column in feedback_columns}
+
+    for column in feedback_columns:
+        if column in df.columns:
+            for review in df[column]:
+                sentiment = analyzer.analyze_sentiment(review)
+                sentiments[column].append(sentiment)
 
         sentiments = []
         if review_period == 1:
