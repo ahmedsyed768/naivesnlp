@@ -155,7 +155,7 @@ if uploaded_file:
         reviews = [review for column in df.columns if column in df.columns for review in df[column].dropna().astype(str).tolist()]
         labels = [1 if sentiment >= 0.65 else 0 for column in df.columns if column in sentiments for sentiment in sentiments[column]]
                 # Prediction on new data
-        pipeline = analyzer.train_classifier(reviews, labels)
+       
         test_reviews = st.text_area("Enter reviews for prediction (separate each review with a new line):")
         if test_reviews:
              test_reviews_list = test_reviews.split('\n')
