@@ -157,13 +157,13 @@ if uploaded_file:
         
         # Prediction on new data
         test_reviews = st.text_area("Enter reviews for prediction (separate each review with a new line):")
-        pipeline = analyzer.train_classifier(reviews, labels)
         if test_reviews:
              test_reviews_list = test_reviews.split('\n')
         try:
             predictions = pipeline.predict(test_reviews_list)
             st.write("Predictions:")
             st.write(predictions)
+            pipeline = analyzer.train_classifier(reviews, labels)
         except Exception as e:
             st.error(f"An error occurred during prediction: {e}")
     else:
