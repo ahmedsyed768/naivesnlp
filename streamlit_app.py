@@ -154,20 +154,6 @@ if uploaded_file:
         st.subheader("Naive Bayes Classifier")
         reviews = [review for column in df.columns if column in df.columns for review in df[column].dropna().astype(str).tolist()]
         labels = [1 if sentiment >= 0.65 else 0 for column in df.columns if column in sentiments for sentiment in sentiments[column]]
-
-        pipeline = None  # Define pipeline variable initially
-
-        # Condition to train classifier
-        if condition_train_classifier:
-            pipeline = train_classifier(features, labels)  # Train classifier and assign to pipeline
-
-        # Prediction code
-        if pipeline is not None:  # Check if pipeline is defined
-            predictions = pipeline.predict(test_reviews)  # Use pipeline for prediction
-            st.write("Predictions:")
-            st.write(predictions)
-        else:
-            st.error("Classifier has not been trained yet.")  # Display error message if pipeline is not defined
         
         # Prediction on new data
         test_reviews = st.text_area("Enter reviews for prediction (separate each review with a new line):")
