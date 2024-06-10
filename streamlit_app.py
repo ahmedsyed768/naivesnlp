@@ -167,7 +167,7 @@ if uploaded_file:
             st.write("Predictions:")
             st.write(predictions)
         else:
-        st.error("Classifier has not been trained yet.")  # Display error message if pipeline is not defined
+            st.error("Classifier has not been trained yet.")  # Display error message if pipeline is not defined
         
         # Prediction on new data
         test_reviews = st.text_area("Enter reviews for prediction (separate each review with a new line):")
