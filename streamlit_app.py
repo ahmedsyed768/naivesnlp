@@ -183,5 +183,5 @@ if uploaded_file:
             predictions = pipeline.predict(test_reviews_list)
             st.write("Predictions:")
             st.write(predictions)
-    else:
-        st.write("Columns mismatch. Please ensure the CSV file contains the required columns.")
+        else:
+            st.write("Columns mismatch. Please ensure the CSV file contains the required columns.")
