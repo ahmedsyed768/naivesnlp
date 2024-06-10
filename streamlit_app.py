@@ -87,7 +87,7 @@ if uploaded_file:
     st.write(df.head())  # Debug statement to check the loaded data
     analyzer = SentimentAnalyzer()
     feedback_columns = ['teaching', 'library_facilities', 'examination', 'labwork', 'extracurricular', 'coursecontent']
-        review_columns = df.columns[1::2]
+        review_columns = feedback_columns[1::2]
         reviews = df[review_columns].values.flatten().tolist()
         review_period = st.selectbox("Review Period:", [1, 4])
 
