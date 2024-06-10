@@ -15,6 +15,7 @@ nltk.download('vader_lexicon')
 class SentimentAnalyzer:
     def __init__(self):
         self.sia = SentimentIntensityAnalyzer()
+        self.clf = None
 
     def preprocess_text(self, text):
         if isinstance(text, str):
