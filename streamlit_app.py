@@ -163,9 +163,9 @@ if uploaded_file:
             predictions = pipeline.predict(test_reviews_list)
             st.write("Predictions:")
             st.write(predictions)
-        else:
-            pipeline = analyzer.train_classifier(reviews, labels)
-            st.write("Classifier trained successfully.")
+    else:
+        pipeline = analyzer.train_classifier(reviews, labels)
+        st.write("Classifier trained successfully.")
         except Exception as e:
             st.error(f"An error occurred during prediction: {e}")
         
