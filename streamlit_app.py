@@ -90,9 +90,23 @@ if uploaded_file:
         teaching_reviews = df['teaching'].dropna().astype(str).tolist()
         teaching_sentiments = [analyzer.analyze_sentiment(review) for review in teaching_reviews]
 
-        # Calculate overall sentiment score
+
+        for review in df[column]:
+                sentiment = analyzer.analyze_sentiment(review)
+                sentiments[column].append(sentiment)
+
+        sentiments = []
+        if review_period == 1:
+            for review in reviews:
+                sentiments.extend(analyzer.analyze_sentiment([review]))
+        else:
+            for i in range(0, len(reviews), review_period):
+                sentiments.extend(analyzer.analyze_sentiment(reviews[i:i + review_period]))
+
+    # Calculate overall sentiment score
         overall_teaching_sentiment = sum(teaching_sentiments) / len(teaching_sentiments)
 
+        
 
         # Plotting sentiment
         weeks = list(range(1, len(sentiments) + 1))
