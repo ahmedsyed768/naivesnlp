@@ -82,10 +82,10 @@ class SentimentAnalyzer:
         return description, trend
 
 
-st.title("Student Review Sentiment Analysis")
+st.title("Student Review Sentiment Analysis using Naive Bayes Classifier")
 
 # Upload CSV file
-uploaded_file = st.file_uploader("Upload your CSV file")
+uploaded_file = st.file_uploader("Upload the selected dataset in CSV file Ref: https://www.kaggle.com/datasets/brarajit18/student-feedback-dataset")
 
 if uploaded_file:
     df = pd.read_csv(io.BytesIO(uploaded_file.read()), encoding='utf-8')
@@ -136,7 +136,7 @@ if uploaded_file:
 
         ax.set_xlabel('Reviews')
         ax.set_ylabel('Sentiment Score')
-        ax.set_title('Sentiment Analysis')
+        ax.set_title('Sentiment Analysis on Teaching Reviews')
         ax.legend()
         st.pyplot(fig)
 
