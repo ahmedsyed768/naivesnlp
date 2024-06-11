@@ -26,9 +26,6 @@ class SentimentAnalyzer:
     def train_classifier(self, reviews, labels):
         vectorizer = CountVectorizer(preprocessor=self.preprocess_text)
         X = vectorizer.fit_transform(reviews)
-    
-    if condition_to_train_classifier:
-        pipeline = train_classifier(features, labels)
 
         if X.shape[0] != len(labels):
             print(f"Number of samples in features: {X.shape[0]}")
@@ -38,6 +35,8 @@ class SentimentAnalyzer:
         self.clf = MultinomialNB()
         self.clf.fit(X, labels)
         return make_pipeline(vectorizer, self.clf)
+        if condition_to_train_classifier:
+            pipeline = train_classifier(features, labels)
 
     def transform_scale(self, score):
         return 5 * score + 5  # Convert the sentiment score from -1 to 1 scale to 0 to 10 scale
