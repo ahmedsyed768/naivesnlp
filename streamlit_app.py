@@ -134,7 +134,7 @@ if uploaded_file:
         ax.plot(weeks, neu_scores, label="Neutral", color="gray")
         ax.plot(weeks, neg_scores, label="Negative", color="red")
 
-        ax.set_xlabel('Week')
+        ax.set_xlabel('Reviews')
         ax.set_ylabel('Sentiment Score')
         ax.set_title('Sentiment Analysis')
         ax.legend()
