@@ -128,11 +128,11 @@ if uploaded_file:
         neg_scores = [sentiment['neg'] for sentiment in sentiments]
 
         fig, ax = plt.subplots()
-        ax.plot(weeks, sentiment_scores, label="Overall", color="blue")
-        ax.fill_between(weeks, sentiment_scores, color="blue", alpha=0.1)
-        ax.plot(weeks, pos_scores, label="Positive", color="green")
-        ax.plot(weeks, neu_scores, label="Neutral", color="gray")
-        ax.plot(weeks, neg_scores, label="Negative", color="red")
+        ax.plot(reviews, sentiment_scores, label="Overall", color="blue")
+        ax.fill_between(reviews, sentiment_scores, color="blue", alpha=0.1)
+        ax.plot(reviews, pos_scores, label="Positive", color="green")
+        ax.plot(reviews, neu_scores, label="Neutral", color="gray")
+        ax.plot(reviews, neg_scores, label="Negative", color="red")
 
         ax.set_xlabel('Reviews')
         ax.set_ylabel('Sentiment Score')
