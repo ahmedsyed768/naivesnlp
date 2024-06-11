@@ -103,8 +103,8 @@ if uploaded_file:
      #   review_columns = df.columns[1::2]
       #  reviews = df[review_columns].values.flatten().tolist()
     if 'teaching' in df.columns:
-        review_columns = df[teaching.column]
-        reviews = df[teaching.column].values.flatten().tolist()
+        review_columns = df.columns[1::2]
+        reviews = df[review_columns].values.flatten().tolist()
 
         review_period = st.selectbox("Review Period:", [1, 4])
 
