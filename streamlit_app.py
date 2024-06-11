@@ -92,17 +92,17 @@ if uploaded_file:
     st.write(df.head())  # Debug statement to check the loaded data
     analyzer = SentimentAnalyzer()
     # Check if 'teaching' column exists
-    if 'teaching' not in df.columns:
-        st.error("The column 'teaching' does not exist in the uploaded file.")
+    if 'coursecontent' not in df.columns:
+        st.error("The column 'coursecontent' does not exist in the uploaded file.")
     else:
         # Analyze sentiments for the 'teaching' column
-        teaching_reviews = df['teaching'].dropna().astype(str).tolist()
-        teaching_sentiments = [analyzer.analyze_sentiment(review) for review in teaching_reviews]
+        coursecontent_reviews = df['coursecontent'].dropna().astype(str).tolist()
+        coursecontent_sentiments = [analyzer.analyze_sentiment(review) for review in coursecontent_reviews]
         
     #if 'teaching' in df.columns and 'coursecontent' in df.columns and 'examination' in df.columns and 'labwork' in df.columns and 'library_facilities' in df.columns and 'extracurricular' in df.columns:
      #   review_columns = df.columns[1::2]
       #  reviews = df[review_columns].values.flatten().tolist()
-    if 'teaching' in df.columns:
+    if 'coursecontent' in df.columns:
         review_columns = df.columns[1::2]
         reviews = df[review_columns].values.flatten().tolist()
 
