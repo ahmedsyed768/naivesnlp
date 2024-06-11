@@ -147,7 +147,8 @@ if uploaded_file:
 
         # Breakdown of analysis
         st.subheader("Breakdown of Analysis")
-        breakdown_df = pd.DataFrame(sentiments, index=list(range(1, len(sentiments) + 1)))
+        #breakdown_df = pd.DataFrame(sentiments, index=list(range(1, len(sentiments) + 1)))
+        breakdown_df = pd.DataFrame(teaching.sentiments, index=list(range(1, len(sentiments) + 1)))
         st.write(breakdown_df)
 
         # Train Naive Bayes classifier
