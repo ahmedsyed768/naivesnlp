@@ -121,7 +121,7 @@ if uploaded_file:
         st.subheader("Sentiment Analysis")
 
         # Plotting sentiment
-        weeks = list(range(1, len(sentiments) + 1))
+        reviews = list(range(1, len(sentiments) + 1))
         sentiment_scores = [sentiment['compound'] for sentiment in sentiments]
         pos_scores = [sentiment['pos'] for sentiment in sentiments]
         neu_scores = [sentiment['neu'] for sentiment in sentiments]
