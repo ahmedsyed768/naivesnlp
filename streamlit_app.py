@@ -99,9 +99,12 @@ if uploaded_file:
         teaching_reviews = df['teaching'].dropna().astype(str).tolist()
         teaching_sentiments = [analyzer.analyze_sentiment(review) for review in teaching_reviews]
         
-    if 'teaching' in df.columns and 'coursecontent' in df.columns and 'examination' in df.columns and 'labwork' in df.columns and 'library_facilities' in df.columns and 'extracurricular' in df.columns:
-        review_columns = df.columns[1::2]
-        reviews = df[review_columns].values.flatten().tolist()
+    #if 'teaching' in df.columns and 'coursecontent' in df.columns and 'examination' in df.columns and 'labwork' in df.columns and 'library_facilities' in df.columns and 'extracurricular' in df.columns:
+     #   review_columns = df.columns[1::2]
+      #  reviews = df[review_columns].values.flatten().tolist()
+    if 'teaching' in df.columns:
+        review_columns = teaching.column
+        reviews = teaching.column.values.flatten().tolist()
 
         review_period = st.selectbox("Review Period:", [1, 4])
 
