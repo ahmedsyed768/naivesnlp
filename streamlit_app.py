@@ -26,13 +26,14 @@ class SentimentAnalyzer:
     def train_classifier(self, reviews, labels):
         vectorizer = CountVectorizer(preprocessor=self.preprocess_text)
         X = vectorizer.fit_transform(reviews)
+    
+    if condition_to_train_classifier:
+        pipeline = train_classifier(features, labels)
 
         if X.shape[0] != len(labels):
             print(f"Number of samples in features: {X.shape[0]}")
             print(f"Number of labels: {len(labels)}")
             raise ValueError("Number of samples in features and labels must be the same.")
-        if condition_to_train_classifier:
-            pipeline = train_classifier(features, labels)
 
         self.clf = MultinomialNB()
         self.clf.fit(X, labels)
